@@ -4,7 +4,8 @@ import java.io.*;
 
 public class ParenthesisTrials{
 
-    public static int count = 0;
+    //public static int count = 0;
+    public static Stack<Character> parenthesisStack = new Stack<Character>();
 
     public static int balance(String parenthesis, int bottomPos, int topPos)
     {
@@ -16,17 +17,23 @@ public class ParenthesisTrials{
             int middle = bottomPos + (topPos - bottomPos)/2;
 
             if(parenthesis.charAt(middle) == '(')
-                count += 1;
+            {
+                parenthesisStack.push(parenthesis.charAt(middle));
+            }
             else if(parenthesis.charAt(middle) == ')')
-                count -= 1; 
-             
+            {
+                if(parenthesisStack.peek() == '(')
+                    parenthesisStack.pop();
+                else
+                    parenthesisStack.push(parenthesis.charAt(middle));
+            }
 
             //Going both ways in the search. 
             balance(parenthesis, bottomPos, middle - 1);
             balance(parenthesis, middle + 1, topPos);
         }
          
-        return count;
+        return parenthesisStack.size();
     }
 
     //Main area where we will run the cases.
@@ -45,18 +52,19 @@ public class ParenthesisTrials{
         file.close();
 
         //Running the method in all of the test cases
+        //After each case, the stack is reset. 
         System.out.println(balance(caseOne, 0 , caseOne.length()-1));
-        count = 0;
+        parenthesisStack.clear();
         System.out.println(balance(caseTwo, 0 , caseTwo.length()-1));
-        count = 0;
+        parenthesisStack.clear();
         System.out.println(balance(caseThree, 0 , caseThree.length()-1));
-        count = 0;
+        parenthesisStack.clear();
         System.out.println(balance(caseFour, 0, caseFour.length()-1));
-        count = 0;
+        parenthesisStack.clear();
         System.out.println(balance(caseFive, 0, caseFive.length()-1));
-        count = 0;
+        parenthesisStack.clear();
         System.out.println(balance(monsterCase, 0, monsterCase.length()-1));
-        count = 0;
+        parenthesisStack.clear();
 
         
     }
