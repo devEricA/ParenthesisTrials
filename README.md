@@ -1,5 +1,8 @@
 # ParenthesisTrials
-Given a series of strings, output the minimum amount of parentheses to make a string of parentheses balanced.
+A lab that is about dealing with balanced parenthesis.
+
+# Problem
+Given a series of strings, output the minimum amount of parenthesis to make a string of parenthesis balanced.
 
 # Test Cases
 1. ((( 
@@ -16,3 +19,9 @@ Given a series of strings, output the minimum amount of parentheses to make a st
 4. 2
 5. 1
 
+# Explanation Behind Approach
+This problem is somewhat similar to [LargestArraySum](https://github.com/devEricA/LargestArraySum), where we have to traverse through a series of data in order to obtain a solution. 
+
+This is another problem where I could draw up a linear search and be done with it. However, big cases will drag down the efficiency of that algorithm. Thus, to further test myself, I included the case of 10 million open and close parenthesis. 
+
+Unlike in LargestArraySum, we are not conducting any sort of removals. Thus, we can use a modified version of BinarySearch to traverse through the string without fear of length changes. The reason for this use is because it greatly reduces the runtime of the program. 
