@@ -14,21 +14,22 @@ public class ParenthesisTrials{
         if(bottomPos <= topPos)
         {
             //Taking the middle position between the top and bottom
-            //int middle = bottomPos + (topPos - bottomPos)/2;
+            int middle = bottomPos + (topPos - bottomPos)/2;
 
-            if(parenthesis.charAt(bottomPos) == '(')
+            if(parenthesis.charAt(middle) == '(')
             {
-                parenthesisStack.push(parenthesis.charAt(bottomPos));
+                parenthesisStack.push(parenthesis.charAt(middle));
             }
-            if(parenthesis.charAt(topPos) == ')')
+            else if(parenthesis.charAt(middle) == ')')
             {
-                if(parenthesisStack.peek() == '(')
+                if(!parenthesisStack.empty() && parenthesisStack.peek() == '(')
                     parenthesisStack.pop();
                 else
-                    parenthesisStack.push(parenthesis.charAt(topPos));
+                    parenthesisStack.push(parenthesis.charAt(middle));
             }
 
-            balance(parenthesis, bottomPos+1, topPos-1);
+            balance(parenthesis, bottomPos, middle - 1);
+            balance(parenthesis, middle + 1, topPos);
         }
          
         return parenthesisStack.size();
