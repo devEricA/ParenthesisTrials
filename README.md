@@ -24,7 +24,7 @@ This problem is somewhat similar to [LargestArraySum](https://github.com/devEric
 
 This is another problem where I could draw up a linear search and be done with it. However, big cases will drag down the efficiency of that algorithm. Thus, to further test myself, I included the case of 10 million open and close parenthesis. 
 
-Unlike in LargestArraySum, we are not conducting any sort of removals. Thus, we can use a modified version of BinarySearch to traverse through the string without fear of length changes. The reason for this use is because it greatly reduces the runtime of the program. 
+Unlike in LargestArraySum, we are not conducting any removals. As a result, we can use a modified version of BinarySearch to traverse through the string without fear of length changes. The reason for this use is because it greatly reduces the runtime of the program. 
 
 # Try it yourself
 To see the results of this lab, simply compile and run ParenthesisTrials.java using an IDE of your choice.
