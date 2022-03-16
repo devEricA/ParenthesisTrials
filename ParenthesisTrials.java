@@ -45,6 +45,69 @@ public class ParenthesisTrials{
         return parenthesisStack.size();
     }
 
+    //Defining the linear balance method
+    public static int linearBalance(String parenthesis){
+
+        //For each character in the string
+        for(Character p:parenthesis.toCharArray())
+        {
+            //If we found an open parenthesis, push it to the stack
+            if(p == '(')
+            {
+                parenthesisStack.push(p);
+            }
+            //If we found a close parenthesis, only pop if we have a corresponding open one.
+            //Else, we push the close parenthesis to the stack. 
+            else if(p == ')')
+            {
+                if(!parenthesisStack.empty() && parenthesisStack.peek() == '(')
+                    parenthesisStack.pop();
+                else
+                    parenthesisStack.push(p);
+            }
+        }
+        //Returning the length of the stack, as it will hold all unsolved parenthesis
+        return parenthesisStack.size();
+    }
+
+    //Method to compare both algorithms
+    public static void compareAlgs(String parenthesis)
+    {
+        //Outputting the string currently being analyzed
+        System.out.println("Current String :: " + parenthesis + "\n");
+
+        //Starting the time of the binary algorithm
+        long binaryAlgTimeStart = System.currentTimeMillis();
+        //Storing the result of the binary algorithm
+        int binaryResult = balance(parenthesis, 0, parenthesis.length()-1);
+        //Ending the time of the binary algorithm
+        long binaryAlgTimeEnd = System.currentTimeMillis();
+        //Resetting the stack
+        parenthesisStack.clear();
+
+        //Starting the time of the linear algorithm
+        long linearAlgTimeStart = System.currentTimeMillis();
+        //Storing the result of the binary algorithm
+        int linearResult = linearBalance(parenthesis);
+        //Ending the time of the binary algorithm
+        long linearAlgTimeEnd = System.currentTimeMillis();
+        //Resetting the stack for other cases
+        parenthesisStack.clear();
+
+        //Printing the execution times
+        System.out.println("Binary balance execution time :: " + (binaryAlgTimeEnd - binaryAlgTimeStart) + " ms");
+        System.out.println("Linear balance execution time :: " + (linearAlgTimeEnd - linearAlgTimeStart) + " ms");
+
+        //If both algorithms do not return the same result, output a warning message
+        //and print the results. 
+        if(binaryResult != linearResult)
+        {
+            System.out.println("WARNING! Inconsistent results between binary and linear balance for this case!");
+            System.out.println("Linear balnace result is " + linearResult);
+            System.out.println("Binary balance result is " + binaryResult);
+        }
+    }
+
     //Main area where we will run the cases.
     public static void main(String [] args) throws IOException{
         
@@ -60,21 +123,13 @@ public class ParenthesisTrials{
         String monsterCase = file.next();
         file.close();
 
-        //Running the method in all of the test cases
-        //After each case, the stack is reset. 
-        System.out.println(balance(caseOne, 0 , caseOne.length()-1));
-        parenthesisStack.clear();
-        System.out.println(balance(caseTwo, 0 , caseTwo.length()-1));
-        parenthesisStack.clear();
-        System.out.println(balance(caseThree, 0 , caseThree.length()-1));
-        parenthesisStack.clear();
-        System.out.println(balance(caseFour, 0, caseFour.length()-1));
-        parenthesisStack.clear();
-        System.out.println(balance(caseFive, 0, caseFive.length()-1));
-        parenthesisStack.clear();
-        System.out.println(balance(monsterCase, 0, monsterCase.length()-1));
-        parenthesisStack.clear();
-
+        //Running the comparisons between the cases
+        compareAlgs(caseOne);
+        compareAlgs(caseTwo);
+        compareAlgs(caseThree);
+        compareAlgs(caseFour);
+        compareAlgs(caseFive);
+        compareAlgs(monsterCase);
         
     }
 
