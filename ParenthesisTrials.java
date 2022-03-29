@@ -105,6 +105,14 @@ public class ParenthesisTrials{
             System.out.println("WARNING! Inconsistent results between binary and linear balance for this case!");
             System.out.println("Linear balnace result is " + linearResult);
             System.out.println("Binary balance result is " + binaryResult);
+            System.out.println("\n");
+        }
+        //Else, output a OK message and print the results
+        else{
+            System.out.println("Results with binary and linear balance are consistent with this case");
+            System.out.println("Linear balnace result is " + linearResult);
+            System.out.println("Binary balance result is " + binaryResult);
+            System.out.println("\n");
         }
     }
 
